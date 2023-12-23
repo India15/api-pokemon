@@ -1,0 +1,49 @@
+/* landing.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Press Start 2P', cursive; /* Utilizar la fuente Press Start 2P */
+  
+  
+
+}
+
+.gif {
+  margin-bottom: 10px; /* Ajustar la distancia entre el GIF y otros elementos */
+}
+
+.gifImage {
+  width: 80%; /* Ajustar el tamaño del GIF */
+  height: 100%; /* Mantener la proporción original */
+  align-items: center;
+  margin-left: 10%;
+}
+
+.btn {
+  align-items: center;
+  background-color: #3363AF;
+  color: white;
+  width: 120px;
+  height: 37px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 2px solid transparent;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #7baeff;
+}
+
+.link {
+  text-decoration: none; /* Eliminar el subrayado del enlace */
+  color: white; /* Color del texto */
+  font-family: 'Press Start 2P', cursive; /* Utilizar la fuente Press Start 2P para el enlace */
+}

@@ -1,0 +1,35 @@
+
+.input {
+    font-size: 12px;
+    border: 2px solid #3363AF; /* Añade un borde para que no se vea tan redondeado */
+    width: 150px;
+    height: 15px;
+    border-radius: 0; /* Elimina el redondeo */
+    padding: 0.5rem;
+  }
+
+
+
+.style_btn {
+    font-size: 12px;
+    font-weight: 700;
+    border: 2px solid transparent;
+    width: 120px;
+    margin-top: 10px;
+    background-color: #3363AF;
+    height: 37px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    border-radius: 5px;
+  }
+  
+  .style_btn:hover {
+    background-color: #7baeff;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: white;
+
+  }
+  

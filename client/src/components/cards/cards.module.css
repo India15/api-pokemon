@@ -1,0 +1,86 @@
+/* cards.module.css */
+
+.Cards {
+    background-size: cover; /* Ajusta según tus preferencias */
+    border-radius: 1rem;
+    overflow-y: hidden;
+    flex: 1;
+    display: flex;
+    width: 100%;
+}
+
+.container_cards {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    overflow-y: auto;
+}
+
+.numberPage_container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 20;
+}
+
+.numberPage_container p {
+    display: inline;
+}
+
+.button_page {
+    height: 2rem;
+    border-radius: 8px;
+    color: white;
+    border: none;
+    width: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.button_page:hover {
+    background-color: rgba(49, 49, 49, 0.552);
+}
+
+.active {
+    border: 2px solid white;
+    background-color: rgba(255, 255, 255, 0.2); /* Ajusta según tus preferencias */
+    color: black; /* Ajusta según tus preferencias */
+}
+
+@media (max-width: 800px) {
+    .Cards {
+        height: 85%;
+    }
+}
+
+.button_prevnext {
+    margin: 10px; /* Ajusta según tus preferencias */
+    padding: 8px 16px; /* Ajusta según tus preferencias */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px; /* Ajusta según tus preferencias */
+    background-color:  #3363AF; /* Ajusta según tus preferencias */
+    color: #fff; /* Ajusta según tus preferencias */
+    transition: background-color 0.3s ease; /* Agregado para un cambio de color suave */
+}
+
+.button_prevnext:hover {
+    background-color: #0056b3; /* Ajusta según tus preferencias */
+}
+
+.button_prevnext:disabled {
+    background-color: #155894; /* Ajusta según tus preferencias */
+    cursor: not-allowed;
+}
