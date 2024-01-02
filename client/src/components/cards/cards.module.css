@@ -1,7 +1,6 @@
-/* cards.module.css */
 
 .Cards {
-    background-size: cover; /* Ajusta según tus preferencias */
+    background-size: cover; 
     border-radius: 1rem;
     overflow-y: hidden;
     flex: 1;
@@ -54,8 +53,8 @@
 
 .active {
     border: 2px solid white;
-    background-color: rgba(255, 255, 255, 0.2); /* Ajusta según tus preferencias */
-    color: black; /* Ajusta según tus preferencias */
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: black; 
 }
 
 @media (max-width: 800px) {
@@ -65,22 +64,33 @@
 }
 
 .button_prevnext {
-    margin: 10px; /* Ajusta según tus preferencias */
-    padding: 8px 16px; /* Ajusta según tus preferencias */
+    margin: 10px; 
+    padding: 8px 16px; 
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px; /* Ajusta según tus preferencias */
-    background-color:  #3363AF; /* Ajusta según tus preferencias */
-    color: #fff; /* Ajusta según tus preferencias */
-    transition: background-color 0.3s ease; /* Agregado para un cambio de color suave */
+    font-size: 16px; 
+    background-color:  #3363AF; 
+    color: #fff; 
+    transition: background-color 0.3s ease; 
 }
 
 .button_prevnext:hover {
-    background-color: #0056b3; /* Ajusta según tus preferencias */
+    background-color: #0056b3;
 }
 
 .button_prevnext:disabled {
-    background-color: #155894; /* Ajusta según tus preferencias */
+    background-color: #155894; 
     cursor: not-allowed;
 }
+
+.styles.numberPage{
+background-color: aqua;
+    color: #070000;
+}
+
+.types_pokemon1 {
+    color: #000; 
+    font-size: 14px; 
+   
+  }

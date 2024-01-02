@@ -1,4 +1,3 @@
-/* card.module.css */
 
 .cardContainer {
   width: 150px;
@@ -8,8 +7,8 @@
   margin: 10px;
   overflow: hidden;
   transition: transform 0.3s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.7); 
 }
-
 .cardContainer:hover {
   transform: scale(1.05);
 }
@@ -35,7 +34,7 @@
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  background: #062bfc2a; /* Ajusta el color de fondo aquí */
+  background: #000000b4; 
 }
 
 .info_pokemon p {
@@ -44,23 +43,56 @@
 }
 
 .name {
-  font-size: 1rem;
+  font-size: 10px;
   margin-top: 5px;
+  color: #FFCB05; 
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  font-family: 'Press Start 2P', cursive; 
+  letter-spacing: 2px; 
+  text-transform: uppercase; 
 }
 
 
-
 .id {
-  background-color: rgba(255, 255, 255, 0.8); /* Ajusta el valor alfa según sea necesario */
-  border-radius: 100%;
-  padding: 5px; /* Ajusta el relleno según sea necesario */
+  background-color: #FFCB05;
+  border-radius: 50%;
+  padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  z-index: 1;
   top: 10px;
   right: 10px;
-  color: rgb(2, 0, 19);
+  color: rgb(0, 0, 0);
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  font-size: 20px; 
+  font-weight: bold; 
+}
+
+.infoLink {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 13px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.637);
+  font-family: Arial, Helvetica, sans-serif;
+  animation: titilar 1s infinite alternate; 
+}
+
+@keyframes titilar {
+  0% {
+    opacity: 1; 
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+.types_pokemon1 {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  color: white; 
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+
 }

@@ -1,14 +1,63 @@
-/* home.module.css */
+.homeContainer {
+  display: flex;
+  background-size: cover;
+  position: relative;
+  background-image: url('../../../public/assets/c.jpg');
+}
+
+.homeFilters {
+  margin-right: 5px; 
+  display: flex; 
+}
 
 
+.homeFilters select.button {
+  width: 120px;
+  height: 50px;
+  font-size: 12px;
+  font-weight: bold;
+  border: 2px solid transparent;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: blue;
+  transition: background-color 0.3s ease-in-out;
+  margin: 0 auto; 
+}
+
+.homeFilters select.button:hover {
+  background-color: #7baeff;
+}
+.select{
+  width: 120px;
+  height: 50px;
+  font-size: 12px;
+  font-weight: bold;
+  border: 2px solid transparent;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: blue;
+  transition: background-color 0.3s ease-in-out;
+  margin: 0 auto; 
+}
+
+.CardsContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 100;
+}
 
 .Cards {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 1rem;
   overflow-y: hidden;
   flex: 1;
-  display: flex;
-  width: 100%;
-  position: relative; /* Asegúrate de que el contenedor de las cartas tenga posición relativa */
-  z-index: 2; /* Ajusta el z-index para que esté encima del fondo */
+  width: 100%; 
+  position: relative;
+  z-index: 20;
 }

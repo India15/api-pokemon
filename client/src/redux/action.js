@@ -3,18 +3,17 @@ import {
   GET_POKEMONS,
   GET_TYPES,
   GET_POKEMON_BY_NAME,
-  GET_POKEMON_ID,
+  GET_POKEMON_BY_ID,
   CLEAR_DATA,
-  FILTERS,
   GET_PAGE_POKEMONS,
-  CERRAR_NAVBAR
-} from './actionsTypes'; 
-
-export const filterAndOrder = (sortSelect, typeSelect, createdSelect) => ({
-  type: FILTERS,
-  payload: { sortSelect, typeSelect, createdSelect },
-});
-
+  CERRAR_NAVBAR,
+  POST_POKEMON,
+  ORDER_BY_NAME,
+  ORDER_BY_STRENGTH,
+  FILTER_BY_TYPE,
+  FILTER_BY_ORIGIN,
+  RESTORE,
+} from './actionsTypes';
 
 export const getPokemons = () => {
   return async (dispatch) => {
@@ -25,17 +24,16 @@ export const getPokemons = () => {
         payload: data,
       });
     } catch (error) {
-      console.log(error.message);
+      console.error( error.message);
     }
   };
 };
-// En actions.js o donde tengas definida tu acción getPagePokemons
-// En tu acción getPagePokemons
+
 export const getPagePokemons = (numberPage) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`http://localhost:3001/pokemons?page=${numberPage}&limit=12`);
-      console.log("Data from API:", data); // Agrega este log para verificar los datos
+   
       dispatch({
         type: GET_PAGE_POKEMONS,
         payload: {
@@ -45,40 +43,63 @@ export const getPagePokemons = (numberPage) => {
         },
       });
     } catch (error) {
-      console.log(error.message);
+      console.error( error.message);
     }
   };
 };
 
+export const getPokemonByName = (name) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`http://localhost:3001/pokemons/${name}`);
+     
 
-// En tu acción getPokemonNameexport const getPokemonByName = (name) => {
-  export const getPokemonByName = (name) => {
-    return async (dispatch) => {
-      try {
-        const { data } = await axios.get(`http://localhost:3001/pokemons/name?name=${name}`);
-        return dispatch({
-          type: GET_POKEMON_BY_NAME,
-          payload: data,
-        });
-      } catch (error) {
-        window.alert(JSON.stringify(error.response.data));
-      }
-      
-    };
-  };
+      return dispatch({
+        type: GET_POKEMON_BY_NAME,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert("Error en la solicitud:", error);
+
+      if (error.response) {
   
+        window.alert("Ocurrió un error al obtener el Pokémon. Por favor, inténtalo de nuevo más tarde.");
+      } else if (error.request) {
+     
+        window.alert("Ocurrió un error al comunicarse con el servidor. Por favor, inténtalo de nuevo más tarde.");
+      } else {
+      
+        window.alert("Ocurrió un error. Por favor, inténtalo de nuevo más tarde.");
+      }
+    }
+  };
+};
 
+export const getPokemonById = (id) => async (dispatch) => {
+  try {
+  
+    const { data } = await axios.get(`http://localhost:3001/pokemons/${id}`);
+  
+    dispatch({
+      type: GET_POKEMON_BY_ID,
+      payload: data,
+    });
+
+  } catch (error) {
+    console.error('Error fetching Pokemon by ID:', error.message);
+  }
+};
 
 export const clearData = () => {
   return {
-      type: CLEAR_DATA
-  }
-}
-
+    type: CLEAR_DATA
+  };
+};
 
 export const getTypes = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("/types");
+    const { data } = await axios.get("http://localhost:3001/types");
+    console.log(data);
     dispatch({
       type: GET_TYPES,
       payload: data,
@@ -88,38 +109,57 @@ export const getTypes = () => async (dispatch) => {
   }
 };
 
-
-export const getPokemonById = (id) => async (dispatch) => {
-  try {
-    const { data } = await axios.get(`/pokemon/${id}`);
-    dispatch({
-      type: GET_POKEMON_ID,
-      payload: data,
-    });
-  } catch (error) {
-    console.error(error.message);
-    // Consider displaying the error on the UI instead of using alert
-  }
-};
-
-export const postPokemon = (payload) => async () => {
-  try {
-    const { data } = await axios.post("/pokemon");
-    console.info("Pokemon created");
-    return data;
-  } catch (error) {
-    console.error(error.message);
-    // Consider displaying the error on the UI instead of using alert
-  }
-};
-
-
-export const cerrarNavbar = (value) => {
-  return {
-      type: CERRAR_NAVBAR,
-      payload: value
+export const createPokemon = (pokemon) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post("http://localhost:3001/pokemons", pokemon);
+      return dispatch({
+        type: POST_POKEMON,
+        payload: data,
+      });
+    } catch (error) {
+      console.error("Error al crear el Pokémon:", error);
+    }
   };
 };
 
+export const cerrarNavbar = (value) => {
+  return {
+    type: CERRAR_NAVBAR,
+    payload: value
+  };
+};
 
+export function orderByName(payload) {
+  return {
+    type: ORDER_BY_NAME,
+    payload
+  };
+}
 
+export function orderByStrength(payload) {
+  return {
+    type: ORDER_BY_STRENGTH,
+    payload
+  };
+}
+
+export function filterByType(payload) {
+  return {
+    type: FILTER_BY_TYPE,
+    payload
+  };
+}
+
+export function filterByOrigin(payload) {
+  return {
+    type: FILTER_BY_ORIGIN,
+    payload
+  };
+}
+
+export const restore = () => {
+  return {
+    type: RESTORE
+  };
+};

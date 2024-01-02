@@ -5,7 +5,8 @@ import Landing from './views/landing/landing.jsx';
 import Navbar from './components/navbar/navBar.jsx';
 import Detail from './views/detail/detail.jsx';
 import Home from './views/home/home.jsx';
-import Create from './views/create/create.jsx';
+import Form from './views/form/Form.jsx';
+import Search from './components/search/search.jsx';
 
 function App() {
   const location = useLocation();
@@ -29,10 +30,10 @@ function App() {
                 <Navbar />
                 <Routes>
                   <Route path='/home' element={<Home />} />
-                  <Route path='/create' element={<Create />} />
-                  <Route path="/pokemon/:id" element={<Detail />} />
-
-                </Routes>
+                  <Route path='/form' element={<Form />} />
+                  <Route path="/detail/:id" element={<Detail />} />
+                  <Route path='/search' element= {<Search />} />
+              </Routes>
               </>
             }
           />

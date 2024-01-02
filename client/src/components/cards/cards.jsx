@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons, getPagePokemons } from "../../redux/action"; // Asegúrate de importar la acción correcta
+import { getPokemons } from "../../redux/action"; 
 import Card from "../card/card";
 import styles from "./cards.module.css";
 
@@ -10,7 +10,7 @@ const Cards = () => {
   const allPokemons = useSelector((state) => state.allPokemons);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const pokemonPerPage = 10;
+  const pokemonPerPage = 12;
 
   useEffect(() => {
     dispatch(getPokemons());
@@ -57,7 +57,8 @@ const Cards = () => {
         >
           Prev
         </button>
-        <p>{currentPage}</p>
+        
+        <p className={styles.numberPage}>{currentPage}</p>
         <button
           className={styles.button_prevnext}
           onClick={handleNext}

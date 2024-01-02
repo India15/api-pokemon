@@ -6,19 +6,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Press Start 2P', cursive; /* Utilizar la fuente Press Start 2P */
+  font-family: 'Press Start 2P', cursive; 
   
   
 
 }
 
 .gif {
-  margin-bottom: 10px; /* Ajustar la distancia entre el GIF y otros elementos */
+  margin-bottom: 10px; 
 }
 
 .gifImage {
-  width: 80%; /* Ajustar el tamaño del GIF */
-  height: 100%; /* Mantener la proporción original */
+  width: 80%; 
+  height: 100%; 
   align-items: center;
   margin-left: 10%;
 }
@@ -43,7 +43,7 @@
 }
 
 .link {
-  text-decoration: none; /* Eliminar el subrayado del enlace */
-  color: white; /* Color del texto */
-  font-family: 'Press Start 2P', cursive; /* Utilizar la fuente Press Start 2P para el enlace */
+  text-decoration: none; 
+  color: white; 
+  font-family: 'Press Start 2P', cursive;
 }

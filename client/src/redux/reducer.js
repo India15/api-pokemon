@@ -1,103 +1,138 @@
-import * as actions from "./actionsTypes";
+import {
+  GET_POKEMONS,
+  GET_POKEMON_BY_NAME,
+  GET_POKEMON_BY_ID,
+  CLEAR_DATA,
+  GET_PAGE_POKEMONS,
+  CERRAR_NAVBAR,
+  GET_TYPES,
+  POST_POKEMON,
+  ORDER_BY_NAME,
+  ORDER_BY_STRENGTH,
+  FILTER_BY_TYPE,
+  FILTER_BY_ORIGIN,
+  RESTORE
+} from './actionsTypes'; 
 
 const initialState = {
   pokemons: [],
-  allPokemonsCache:[],
+  allPokemonsCache: [],
   allPokemons: [],
   showPokemons: [],
-  searchPokemon:[],
+  searchPokemon: [],
+  createPokemons: [],
+  pokemonTypes: [],
   numberPage: 1,
   types: [],
-  detail: [],
+  pokemonDetails: {},
+  filteredPokemons: [],
   error: null,
   navbarVisible: false,
 };
 
 const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case actions.GET_POKEMONS:
-      return { ...state, allPokemonsCache: [...action.payload], allPokemons: [...action.payload] };
+  const { type, payload } = action; // Extrae type y payload
 
+  switch (type) {
+    case GET_POKEMONS:
+      return { ...state, allPokemonsCache: [...payload], allPokemons: [...payload] };
 
-  case actions.GET_PAGE_POKEMONS:
-  const pokemonPerPage = 12;
-  const startIdx = (action.payload - 1) * pokemonPerPage;
-  const endIdx = startIdx + pokemonPerPage;
+    case GET_PAGE_POKEMONS:
+      const pokemonPerPage = 12;
+      const startIdx = (payload - 1) * pokemonPerPage;
+      const endIdx = startIdx + pokemonPerPage;
 
-  const updatedShowPokemons =
-    state.allPokemons.length <= endIdx
-      ? state.allPokemons.slice(startIdx)
-      : state.allPokemons.slice(startIdx, endIdx);
+      const updatedShowPokemons =
+        state.allPokemons.length <= endIdx
+          ? state.allPokemons.slice(startIdx)
+          : state.allPokemons.slice(startIdx, endIdx);
 
-  return { ...state, showPokemons: updatedShowPokemons, numberPage: action.payload };
+      return { ...state, showPokemons: updatedShowPokemons, numberPage: payload };
 
-  case actions.GET_POKEMON_BY_NAME:
-    return { ...state, searchPokemon: action.payload };
+    case GET_POKEMON_BY_NAME:
+      const updatedSearchPokemon = Array.isArray(payload) ? payload : [payload];
+      return { ...state, allPokemonsCache: [...updatedSearchPokemon], searchPokemon: updatedSearchPokemon };
+
+    case GET_POKEMON_BY_ID:
+ 
+      return { ...state, pokemonDetails: payload };
+    
+      case POST_POKEMON:
+        return {
+          ...state,
+          allPokemonsCache: [...state.allPokemonsCache, payload],
+          allPokemons: [...state.allPokemons, { ...payload, createdInDb: true }],
+          createPokemons: [...state.createPokemons, { ...payload, createdInDb: true }],
+        };
+      
+    case GET_TYPES:
+      return { ...state, pokemonTypes: payload };
+
+    case CLEAR_DATA:
+      return { ...state, searchPokemon: [] };
+
+    case CERRAR_NAVBAR:
+      return { ...state, navbarVisible: payload }; // Usar payload en lugar de action.payload
+
+    case ORDER_BY_NAME:
+      const sortedNames = [...state.allPokemons].sort((a, b) => {
+        return action.payload === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+      });
+
+      return {
+        ...state,
+        allPokemons: sortedNames,
+      };
+
+    case ORDER_BY_STRENGTH:
+      const sortedStrength = [...state.allPokemons].sort((a, b) => {
+        return action.payload === 'strongest' ? b.attack - a.attack : a.attack - b.attack;
+      });
+
+      return {
+        ...state,
+        allPokemons: sortedStrength,
+      };
+case FILTER_BY_ORIGIN:
+  const propertyName = 'created';
   
+  // Verificar si la propiedad existe en al menos un Pokemon
+  const isPropertyAvailable = state.allPokemons.length > 0 &&
+    propertyName in state.allPokemons[0];
+  
+  let filteredByOrigin;
+  
+  if (isPropertyAvailable) {
+    filteredByOrigin = action.payload === 'created by User' ?
+      state.allPokemons.filter((pokemon) => pokemon[propertyName]) :
+      state.allPokemons.filter((pokemon) => !pokemon[propertyName]);
+  } else {
+    // Manejar el caso en que la propiedad no está presente en los Pokemon
+    console.error(`La propiedad ${propertyName} no está presente en los objetos Pokémon.`);
+    filteredByOrigin = state.allPokemons;
+  }
+  
+  return {
+    ...state,
+    allPokemons: action.payload === 'all' ? state.allPokemons : filteredByOrigin,
+  };
 
+    case FILTER_BY_TYPE:
+      const filteredByType = action.payload === 'all' ?
+        state.allPokemons :
+        state.allPokemons.filter((pokemon) => pokemon.types.includes(action.payload));
 
-case actions.CLEAR_DATA:
-  return { ...state, searchPokemon: [] };
-
-    
-    
-      case actions.GET_POKEMON_ID:
       return {
         ...state,
-        detail: action.payload,
+        allPokemons: filteredByType,
       };
 
-    case actions.POST_POKEMON:
+    case RESTORE:
       return {
         ...state,
+        allPokemons: state.filteredPokemons,
+        addedPokemons: [],
       };
-
-    case actions.FILTERS:
-      try {
-        const sortedPokemons = [...state.allPokemons];
-
-        if (action.payload.sortSelect === "nameAsc") {
-          sortedPokemons.sort((a, b) => a.name.localeCompare(b.name));
-        } else if (action.payload.sortSelect === "nameDesc") {
-          sortedPokemons.sort((a, b) => b.name.localeCompare(a.name));
-        } else if (action.payload.sortSelect === "attAsc") {
-          sortedPokemons.sort((a, b) => b.attack - a.attack);
-        } else if (action.payload.sortSelect === "attDesc") {
-          sortedPokemons.sort((a, b) => a.attack - b.attack);
-        }
-
-        const filteredByType = action.payload.typeSelect === "All"
-          ? sortedPokemons
-          : sortedPokemons.filter(
-            (pokemon) => pokemon.types.some((type) => type.name === action.payload.typeSelect)
-          );
-
-        const filteredByCreated = action.payload.createdSelect === "All"
-          ? filteredByType
-          : action.payload.createdSelect === "created"
-            ? filteredByType.filter((pokemon) => typeof pokemon.id !== "number")
-            : filteredByType.filter((pokemon) => typeof pokemon.id === "number");
-
-        if (filteredByCreated.length === 0) {
-          throw new Error("No Pokemon of such type");
-        }
-
-        return {
-          ...state,
-          pokemons: filteredByCreated,
-          error: null,
-        };
-      } catch (error) {
-        return {
-          ...state,
-          error: error.message,
-        };
-      }
-
-
-      case actions.CERRAR_NAVBAR:
-  return { ...state, navbarVisible: action.payload }; // Usar action.payload en lugar de payload
-
 
     default:
       return state;

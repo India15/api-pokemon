@@ -1,35 +1,38 @@
+/* searchBar.module.css */
 
-.input {
-    font-size: 12px;
-    border: 2px solid #3363AF; /* Añade un borde para que no se vea tan redondeado */
-    width: 150px;
-    height: 15px;
-    border-radius: 0; /* Elimina el redondeo */
-    padding: 0.5rem;
-  }
+.input_search {
+  /* Add or update styles to match the navigation bar */
+  background-color: #ecf4ff;
+  color: rgb(46, 33, 151);
+  width: 170px;
+  height: 37px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 2px solid transparent;
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
 
+.input_search:hover {
+  background-color: #f3f8ff;
+}
 
+.button_search {
+  /* Add or update styles to match the navigation bar */
+  background-color: #3363AF;
+  color: white;
+  width: 120px;
+  height: 37px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 2px solid transparent;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
 
-.style_btn {
-    font-size: 12px;
-    font-weight: 700;
-    border: 2px solid transparent;
-    width: 120px;
-    margin-top: 10px;
-    background-color: #3363AF;
-    height: 37px;
-    cursor: pointer;
-    transition: all .3s ease-in-out;
-    border-radius: 5px;
-  }
-  
-  .style_btn:hover {
-    background-color: #7baeff;
-  }
-  
-  .link {
-    text-decoration: none;
-    color: white;
-
-  }
-  
+.button_search:hover {
+  background-color: #7baeff;
+}

@@ -1,0 +1,32 @@
+
+.Cards {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    background-image: url('../../../public/assets/c.jpg');
+}
+  
+  .container_cards {
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 20px; 
+
+  }
+  .Card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 700px; 
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .Card:hover {
+    transform: scale(10.1); 
+  }
+  

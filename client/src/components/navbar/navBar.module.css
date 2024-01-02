@@ -1,16 +1,15 @@
-/* navBar.module.css */
 
 .navbar {
-  background-color: #e63c25; /* Rojo Pokémon */
+  background-color: #FFCB05; 
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
 .logo {
-  width: 60px; /* Ajustar según el tamaño de tu logo */
+  width: 60px; 
   height: auto;
   margin-right: 10px;
 }
@@ -29,7 +28,7 @@
 }
 
 .nav-links a:hover {
-  color: #ffd700; /* Amarillo Pikachu al pasar el mouse */
+  color: #ffd700; 
 }
 
 .button {
@@ -38,12 +37,13 @@
   width: 120px;
   height: 37px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: bold;
   border: 2px solid transparent;
   padding: 8px 15px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  margin: 0 auto; 
 }
 
 .button:hover {
@@ -54,10 +54,10 @@
   text-decoration: none;
   color: white;
   font-weight: bold;
-  font-size: 12px; /* Ajusta el tamaño del texto según sea necesario */
+  font-size: 12px; 
   transition: color 0.3s ease-in-out;
 }
 
 .link:hover {
-  color: #ffffff; /* Amarillo Pikachu al pasar el mouse */
+  color: #ffffff; 
 }

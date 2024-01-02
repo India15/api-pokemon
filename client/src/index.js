@@ -2,8 +2,8 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import App from './App';  // Ajusta la ruta según la ubicación correcta de tu componente App
-import store from './redux/store';  // Ajusta la ruta según la ubicación correcta de tu store
+import App from './App';  
+import store from './redux/store';  
 import reportWebVitals from './reportWebVitals';
 
 const root = createRoot(document.getElementById('root'));

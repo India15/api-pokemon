@@ -10,10 +10,9 @@ const router = Router();
 
 router.get('/pokemons/', getPokemons);
 router.get('/pokemons/:idPokemon', getPokemonById);
-// Rutas de la API
 router.get('/pokemons/name', getPokemonByName);
-; // Cambiado de '/pokemons/name' a '/pokemons'
 router.post('/pokemons', postPokemon);
 router.get('/types', getTypesPokemon);
+
 
 module.exports = router;
