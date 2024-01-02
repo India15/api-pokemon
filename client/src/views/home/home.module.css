@@ -26,7 +26,7 @@
 }
 
 .homeFilters select.button:hover {
-  background-color: #7baeff;
+  background-color: #5075b0;
 }
 .select{
   width: 120px;
@@ -60,4 +60,30 @@
   width: 100%; 
   position: relative;
   z-index: 20;
+}
+
+.loading {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.filterButton {
+  width: 140px;
+  height: 40px;
+  font-size:  9px;
+  font-weight: bold;
+  border: 2px solid transparent;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #3363AF;
+  transition: background-color 0.3s ease-in-out;
+  margin: 5px 0; 
+  display: block; 
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
 }

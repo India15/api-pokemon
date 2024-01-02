@@ -151,9 +151,9 @@
 
 
 .submit_button {
-    width: 25%;
+    width: 20%;
     height: 40px;
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: 600;
     color: white;
     border: 2px solid transparent;
@@ -163,3 +163,24 @@
     background-color: #133f87;
     transition: background-color 0.3s ease-in-out;
 }
+
+.button_return {
+    width: 130px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 700;
+    border: 2px solid transparent;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #133f87;
+    transition: background-color 0.3s ease-in-out;
+    margin: 5px 0;
+    display: block;
+    color: white;
+    text-decoration: none; 
+  }
+  
+  .link{
+    text-decoration: none;
+  }

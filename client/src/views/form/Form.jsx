@@ -2,8 +2,10 @@ import styles from "./Form.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { createPokemon, cerrarNavbar, getTypes } from "../../redux/action";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import validationSubmit from "./validationSubmit";
+
 const Form = () => {
   const dispatch = useDispatch();
   const pokemonTypes = useSelector((state) => state.pokemonTypes) || [];
@@ -125,6 +127,9 @@ const Form = () => {
       onClick={() => dispatch(cerrarNavbar(false))}
     >
       <form onSubmit={handleSubmit} className={styles.form}>
+      <Link className={styles.link} to="/home">
+            <button className={styles.button_return}>Return</button>
+          </Link>
         <h2 className={styles.title}>Create a new Pokemon</h2>
         <div className={styles.inputs_container}>
           <div className={styles.image_container}>
@@ -240,6 +245,7 @@ const Form = () => {
         <button className={styles.submit_button} type="submit">Create</button>
       </form>
     </div>
+    
   );
 };
 
