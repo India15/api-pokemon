@@ -1,8 +1,6 @@
-// ---------  HOOKS  ---------
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import {clearData, cerrarNavbar} from "../../redux/action";
-// -------------------------------------------------
 import styles from "./search.module.css";
 import Card from "../../components/card/card";
 

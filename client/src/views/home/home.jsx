@@ -48,7 +48,7 @@ const Home = () => {
 
   return (
     <div className={styles.homeContainer}>
-       <div className={styles.filtersContainer}>
+      <div className={styles.filtersContainer}>
       <form className={styles.filters}> 
         <select className= {`${styles.homeFilters} ${styles.button}`}  value='' onChange={e => handleSort(e)}>
           <option disabled value="">Order/Name</option>
