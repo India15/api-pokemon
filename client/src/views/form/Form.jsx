@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { createPokemon, cerrarNavbar, getTypes } from "../../redux/action";
 import axios from "axios";
-
+import validationSubmit from "./validationSubmit";
 const Form = () => {
   const dispatch = useDispatch();
   const pokemonTypes = useSelector((state) => state.pokemonTypes) || [];
@@ -94,19 +94,27 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    // Realizar validaciones específicas antes de continuar
+    const errors = validationSubmit(pokemon);
+  
+    if (Object.keys(errors).length > 0) {
+      // Manejar los errores, mostrar mensajes, etc.
+      console.error("Errores de validación:", errors);
+      window.alert("Por favor, corrige los errores antes de continuar.");
+      return;
+    }
+  
     const urlImage = await submitImage();
     if (urlImage === false) {
       return;
     }
-
+  
     try {
-      
       await dispatch(createPokemon({ ...pokemon, image: urlImage }));
-    
       window.alert("Pokemon creado");
     } catch (error) {
-      
+      console.error("Error al crear el Pokémon:", error);
       window.alert("Error al crear el Pokémon");
     }
   };
@@ -169,7 +177,7 @@ const Form = () => {
             <label htmlFor="defense">Defense</label>
             <input
               type="range"
-              min="5"
+              min="1"
               max="200"
               name="defense"
               id="defense"
@@ -181,7 +189,7 @@ const Form = () => {
             <label htmlFor="speed">Speed</label>
             <input
               type="range"
-              min="5"
+              min="1"
               max="200"
               name="speed"
               id="speed"
