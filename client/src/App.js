@@ -7,6 +7,8 @@ import Detail from './views/detail/detail.jsx';
 import Home from './views/home/home.jsx';
 import Form from './views/form/Form.jsx';
 import Search from './components/search/search.jsx';
+import NotFoundPage from './views/notfoundpage/notFoundPage.jsx';
+
 
 function App() {
   const location = useLocation();
@@ -33,6 +35,7 @@ function App() {
                   <Route path='/form' element={<Form />} />
                   <Route path="/detail/:id" element={<Detail />} />
                   <Route path='/search' element= {<Search />} />
+                  <Route path='*' element={<NotFoundPage />} />
               </Routes>
               </>
             }

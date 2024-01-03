@@ -76,7 +76,7 @@ const Home = () => {
             onChange={(e) => handleSort(e)}
           >
             <option disabled value="">
-              Order/Name
+              Order-Name
             </option>
             <option value="asc">A - Z</option>
             <option value="desc">Z - A</option>
@@ -88,7 +88,7 @@ const Home = () => {
             onChange={(e) => handleSortAttack(e)}
           >
             <option disabled value="">
-              Order/Strength...
+              Order-Strength...
             </option>
             <option value="strongest"> + attack</option>
             <option value="weakest"> - attack</option>
@@ -100,7 +100,7 @@ const Home = () => {
             onChange={(e) => handleFilterType(e)}
           >
             <option className={styles.filterButton} disabled value="">
-              Filter/Type
+              Filter-Type
             </option>
             <option value='all'>All</option>
             <option value="bug">Bug</option>
@@ -131,7 +131,7 @@ const Home = () => {
             onChange={(e) => handleFilterByOrigin(e)}
           >
             <option disabled value="">
-              Filter/Origin
+              Filter-Origin
             </option>
             <option value="all">Show all...</option>
             <option value="originals">Originals...</option>

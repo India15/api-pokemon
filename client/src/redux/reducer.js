@@ -16,7 +16,7 @@ import {
 
 const initialState = {
   pokemons: [],
-  allPokemonsCache: [],
+  pokemonsCache: [],
   allPokemons: [],
   showPokemons: [],
   searchPokemon: [],
@@ -31,36 +31,35 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  const { type, payload } = action; // Extrae type y payload
+  const { type, payload } = action; 
 
   switch (type) {
     case GET_POKEMONS:
-      return { ...state, allPokemonsCache: [...payload], allPokemons: [...payload] };
+      return { ...state, allPokemons: [...payload] };
 
     case GET_PAGE_POKEMONS:
       const pokemonPerPage = 12;
-      const startIdx = (payload - 1) * pokemonPerPage;
-      const endIdx = startIdx + pokemonPerPage;
+      const startIndex= (payload - 1) * pokemonPerPage;
+      const endIdx = startIndex + pokemonPerPage;
 
       const updatedShowPokemons =
         state.allPokemons.length <= endIdx
-          ? state.allPokemons.slice(startIdx)
-          : state.allPokemons.slice(startIdx, endIdx);
+          ? state.allPokemons.slice(startIndex)
+          : state.allPokemons.slice(startIndex, endIdx);
 
       return { ...state, showPokemons: updatedShowPokemons, numberPage: payload };
 
     case GET_POKEMON_BY_NAME:
       const updatedSearchPokemon = Array.isArray(payload) ? payload : [payload];
-      return { ...state, allPokemonsCache: [...updatedSearchPokemon], searchPokemon: updatedSearchPokemon };
+      return { ...state, searchPokemon: updatedSearchPokemon };
 
     case GET_POKEMON_BY_ID:
- 
-      return { ...state, pokemonDetails: payload };
+       return { ...state, pokemonDetails: payload };
     
       case POST_POKEMON:
         return {
           ...state,
-          allPokemonsCache: [...state.allPokemonsCache, payload],
+          pokemonsCache: [...state.pokemonsCache, payload],
           allPokemons: [...state.allPokemons, { ...payload, createdInDb: true }],
           createPokemons: [...state.createPokemons, { ...payload, createdInDb: true }],
         };
@@ -93,10 +92,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         allPokemons: sortedStrength,
       };
+
 case FILTER_BY_ORIGIN:
   const propertyName = 'created';
-  
-  // Verificar si la propiedad existe en al menos un Pokemon
   const isPropertyAvailable = state.allPokemons.length > 0 &&
     propertyName in state.allPokemons[0];
   
@@ -107,7 +105,6 @@ case FILTER_BY_ORIGIN:
       state.allPokemons.filter((pokemon) => pokemon[propertyName]) :
       state.allPokemons.filter((pokemon) => !pokemon[propertyName]);
   } else {
-    // Manejar el caso en que la propiedad no está presente en los Pokemon
     console.error(`La propiedad ${propertyName} no está presente en los objetos Pokémon.`);
     filteredByOrigin = state.allPokemons;
   }

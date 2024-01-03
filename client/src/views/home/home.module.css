@@ -87,3 +87,8 @@
   font-weight: 700;
   color: white;
 }
+
+.filtered {
+color: #fff;
+  display: none;
+}
