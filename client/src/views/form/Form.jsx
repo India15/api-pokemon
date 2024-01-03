@@ -32,10 +32,6 @@ const typeIcons = {
 };
 
 
-
-
-
-
 const Form = () => {
   const dispatch = useDispatch();
   const pokemonTypes = useSelector((state) => state.pokemonTypes) || [];
@@ -260,7 +256,7 @@ const handleSubmit = async (e) => {
         onChange={handleClick}
         checked={pokemon.types.includes(type.type)}
       />
-      <label htmlFor={type.type} className={styles.type_label}>
+      <label htmlFor={type.type} className={styles.type_label}> 
         <span className={styles.type_icon}>{typeIcons[type.type]}</span>
         {type.type}
       </label>
