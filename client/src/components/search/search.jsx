@@ -1,8 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import {clearData, cerrarNavbar} from "../../redux/action";
 import styles from "./search.module.css";
 import Card from "../../components/card/card";
+
 
 const Search = () => {
     const dispatch = useDispatch()
@@ -29,6 +31,9 @@ const Search = () => {
                 <p>No hay pokemones para mostrar.</p>
             }
         </div>
+        <Link to="/home">
+            <button className={styles.button}>Return</button>
+          </Link>
     </div>
     )
 }

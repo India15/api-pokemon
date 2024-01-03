@@ -1,32 +1,52 @@
-
 .Cards {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh; 
-    background-image: url('../../../public/assets/c.jpg');
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; 
+  background-image: url('../../../public/assets/c.jpg');
 }
-  
-  .container_cards {
-    max-width: 1200px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; 
-    gap: 20px; 
 
-  }
-  .Card {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    width: 700px; 
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .Card:hover {
-    transform: scale(10.1); 
-  }
-  
+.container_cards {
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  gap: 20px; 
+}
+
+.Card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  width: 700px; 
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  position: relative; /* Añadido para posicionar el botón correctamente */
+}
+
+.Card:hover {
+  transform: scale(1.1); /* Ajustado el valor para evitar problemas de renderizado */
+}
+
+.button {
+  position: absolute; /* Añadido para posicionar el botón de manera absoluta */
+  bottom: 10px; /* Ajusta el espacio entre el botón y el borde inferior de la tarjeta */
+  left: 50%; /* Posiciona el botón en el centro horizontal de la tarjeta */
+  transform: translateX(-50%); /* Centra el botón horizontalmente respecto al centro de la tarjeta */
+  margin-top: 20px;
+  padding: 8px 15px;
+  background-color: #3363AF;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
