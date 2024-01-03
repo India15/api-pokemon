@@ -16,7 +16,7 @@
 .form {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background: linear-gradient(rgb(51, 99, 175), rgb(0, 0, 0));
-    max-width: 600px;
+    max-width: 400px;
     max-height: 100%;
     padding: 1rem;
     border-radius: 2rem;
@@ -164,6 +164,10 @@
     transition: background-color 0.3s ease-in-out;
 }
 
+.submit_button:hover {
+    background-color: #3363AF;
+}
+
 .button_return {
     width: 130px;
     height: 40px;
@@ -179,6 +183,10 @@
     display: block;
     color: white;
     text-decoration: none; 
+  }
+
+  .button_return:hover{
+    background-color: #3363AF;
   }
   
   .link{

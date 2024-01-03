@@ -52,8 +52,7 @@ const Detail = () => {
           </div>
           {height && <h4 className={styles.stat}>Height: {height}</h4>}
           {weight && <h4 className={styles.stat}>Weight: {weight}</h4>}
-          
-          {/* Agrega el enlace y el botón debajo de la tarjeta */}
+        
           <Link to="/home">
             <button className={styles.button}>Return</button>
           </Link>

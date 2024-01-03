@@ -142,6 +142,7 @@ const Home = () => {
 
           {order && <span className={styles.filtered}>{order}</span>}
         </form>
+      
       </div>
       <div className={styles.CardsContainer}>
         <div className={styles.Cards}>

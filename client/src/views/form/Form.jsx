@@ -39,27 +39,22 @@ const Form = () => {
     fetchTypes();
   }, [dispatch]);
 
-  const handleChange = (event) => {
-    const property = event.target.name;
-    let value = event.target.value;
+const handleChange = (event) => {
+  const property = event.target.name;
+  let value = event.target.value;
 
-    if (property === "image") {
-      return setImage(event.target.files[0]);
-    }
+  if (property === "image") {
+    setImage(event.target.files[0]);
+    return;
+  }
 
-    if (
-      property === "health" ||
-      property === "attack" ||
-      property === "defense" ||
-      property === "speed" ||
-      property === "height" ||
-      property === "weight"
-    ) {
-      value = Number(value);
-    }
+  const numericProperties = ["health", "attack", "defense", "speed", "height", "weight"];
+  if (numericProperties.includes(property)) {
+    value = Number(value);
+  }
 
-    setPokemon({ ...pokemon, [property]: value });
-  };
+  setPokemon({ ...pokemon, [property]: value });
+};
 
   const submitImage = async () => {
     const formData = new FormData();
@@ -94,32 +89,26 @@ const Form = () => {
     setSelectedTypesCount(updatedTypes.length);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    // Realizar validaciones específicas antes de continuar
-    const errors = validationSubmit(pokemon);
-  
-    if (Object.keys(errors).length > 0) {
-      // Manejar los errores, mostrar mensajes, etc.
-      console.error("Errores de validación:", errors);
-      window.alert("Por favor, corrige los errores antes de continuar.");
-      return;
-    }
-  
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const errors = validationSubmit(pokemon);
+
+  if (Object.keys(errors).length > 0) {
+    console.error("Errores de validación:", errors);
+    window.alert("Por favor, corrige los errores antes de continuar.");
+    return;
+  }
+
+  try {
     const urlImage = await submitImage();
-    if (urlImage === false) {
-      return;
-    }
-  
-    try {
-      await dispatch(createPokemon({ ...pokemon, image: urlImage }));
-      window.alert("Pokemon creado");
-    } catch (error) {
-      console.error("Error al crear el Pokémon:", error);
-      window.alert("Error al crear el Pokémon");
-    }
-  };
+    await dispatch(createPokemon({ ...pokemon, image: urlImage }));
+    window.alert("Pokemon creado");
+  } catch (error) {
+    console.error("Error al crear el Pokémon:", error);
+    window.alert("Error al crear el Pokémon");
+  }
+};
 
   return (
     <div
