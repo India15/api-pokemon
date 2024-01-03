@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import validationSubmit from "./validationSubmit";
 
-
 const typeIcons = {
   all: "🌐",
   normal: "🤷‍♂️",
@@ -31,7 +30,6 @@ const typeIcons = {
   shadow: "👥",
 };
 
-
 const Form = () => {
   const dispatch = useDispatch();
   const pokemonTypes = useSelector((state) => state.pokemonTypes) || [];
@@ -42,7 +40,7 @@ const Form = () => {
     health: 1,
     attack: 1,
     defense: 1,
-    speed: 1,
+    speed: 0,
     height: 1,
     weight: 1,
     types: [],
@@ -50,62 +48,86 @@ const Form = () => {
 
   const [image, setImage] = useState(null);
   const [selectedTypesCount, setSelectedTypesCount] = useState(0);
+  const [validationErrors, setValidationErrors] = useState({});
 
   useEffect(() => {
     const fetchTypes = async () => {
       try {
         const response = await axios.get("http://localhost:3001/types");
-       
         dispatch(getTypes(response.data));
       } catch (error) {
-        console.error ("Error fetching types:", error);
+        console.error("Error fetching types:", error);
       }
     };
 
     fetchTypes();
   }, [dispatch]);
 
-const handleChange = (event) => {
-  const property = event.target.name;
-  let value = event.target.value;
+  const handleValidation = (property, value) => {
+    const updatedErrors = { ...validationErrors };
+    const updatedPokemon = { ...pokemon, [property]: value };
 
-  if (property === "image") {
-    setImage(event.target.files[0]);
-    return;
-  }
-//parsea a n
-  const numericProperties = ["health", "attack", "defense", "speed", "height", "weight"];
-  if (numericProperties.includes(property)) {
-    value = Number(value);
-  }
+    switch (property) {
+      case "name":
+        updatedErrors.name = (value.length < 3 || /\d/.test(value)) ? "El nombre debe contener más de 3 caracteres y no puede contener números" : "";
+        break;
+ 
+      case "height":
+        updatedErrors.height = isNaN(value) || value <= 0 ? "La altura debe ser un número positivo" : "";
+        break;
+      case "weight":
+        updatedErrors.weight = isNaN(value) || value <= 0 ? "El peso debe ser un número positivo" : "";
+        break;
+      case "types":
+        updatedErrors.types = value.length === 0 ? "Debe seleccionar al menos un tipo" : "";
+        break;
+      default:
+        break;
+    }
 
-  setPokemon({ ...pokemon, [property]: value });
-};
+    setValidationErrors(updatedErrors);
+    setPokemon(updatedPokemon);
+  };
 
-const submitImage = async () => {
-  const formData = new FormData();
-  formData.append("image", image);
+  const handleChange = (event) => {
+    const property = event.target.name;
+    let value = event.target.value;
 
-  try {
-    const response = await fetch("https://api.imgbb.com/1/upload?key=9e430c5e95bf23e4e358a33120c0c77d", {
-      method: "POST",
-      body: formData,
-    });
+    if (property === "image") {
+      setImage(event.target.files[0]);
+      return;
+    }
 
-    if (response.ok) {
-      const responseData = await response.json();
-      return responseData.data.url;
-    } else {
-      console.error("Error al subir imagen en ImgBB:", response.statusText);
+    const numericProperties = ["health", "attack", "defense", "speed", "height", "weight"];
+    if (numericProperties.includes(property)) {
+      value = Number(value);
+    }
+
+    handleValidation(property, value);
+  };
+
+  const submitImage = async () => {
+    const formData = new FormData();
+    formData.append("image", image);
+
+    try {
+      const response = await fetch("https://api.imgbb.com/1/upload?key=9e430c5e95bf23e4e358a33120c0c77d", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        return responseData.data.url;
+      } else {
+        console.error("Error al subir imagen en ImgBB:", response.statusText);
+        return false;
+      }
+    } catch (error) {
+      console.error("Error al subir imagen en ImgBB:", error);
       return false;
     }
-  } catch (error) {
-    console.error("Error al subir imagen en  ImgBB:", error);
-    return false;
-  }
-};
-
-
+  };
 
   const handleClick = (event) => {
     const typeInput = event.target.name;
@@ -119,31 +141,30 @@ const submitImage = async () => {
       ? [...pokemon.types, typeInput]
       : pokemon.types.filter((type) => type !== typeInput);
 
-    // Actualizar el estado de 'types' utilizando setPokemon
     setPokemon({ ...pokemon, types: updatedTypes });
     setSelectedTypesCount(updatedTypes.length);
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const errors = validationSubmit(pokemon);
+    const errors = validationSubmit(pokemon);
 
-  if (Object.keys(errors).length > 0) {
-    console.error("Errores de validación:", errors);
-    window.alert("Por favor, corrige los errores antes de continuar.");
-    return;
-  }
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      window.alert("Por favor, corrige los errores antes de continuar.");
+      return;
+    }
 
-  try {
-    const urlImage = await submitImage();
-    await dispatch(createPokemon({ ...pokemon, image: urlImage }));
-    window.alert("Pokemon creado");
-  } catch (error) {
-    console.error("Error al crear el Pokémon:", error);
-    window.alert("Error al crear el Pokémon");
-  }
-};
+    try {
+      const urlImage = await submitImage();
+      await dispatch(createPokemon({ ...pokemon, image: urlImage }));
+      window.alert("Pokemon creado");
+    } catch (error) {
+      console.error("Error al crear el Pokémon:", error);
+      window.alert("Error al crear el Pokémon");
+    }
+  };
 
   return (
     <div
@@ -151,9 +172,9 @@ const handleSubmit = async (e) => {
       onClick={() => dispatch(cerrarNavbar(false))}
     >
       <form onSubmit={handleSubmit} className={styles.form}>
-      <Link className={styles.link} to="/home">
-            <button className={styles.button_return}>Return</button>
-          </Link>
+        <Link className={styles.link} to="/home">
+          <button className={styles.button_return}>Return</button>
+        </Link>
         <h2 className={styles.title}>Create a new Pokemon</h2>
         <div className={styles.inputs_container}>
           <div className={styles.image_container}>
@@ -228,45 +249,36 @@ const handleSubmit = async (e) => {
           </div>
           <div className={styles.height_container}>
             <label htmlFor="height">Height</label>
-            <input
-              type="number"
-              name="height"
-              id="height"
-              onChange={handleChange}
-            />
+            <input type="number" name="height" id="height" onChange={handleChange} />
+          
           </div>
           <div className={styles.weight_container}>
             <label htmlFor="weight">Weight</label>
-            <input
-              type="number"
-              name="weight"
-              id="weight"
-              onChange={handleChange}
-            />
-          </div>
+            <input type="number" name="weight" id="weight" onChange={handleChange} />
+           </div>
         </div>
         <div className={styles.types_container}>
-  <label>Select Types (Up to 2):</label>
-  {pokemonTypes.map((type) => (
-    <div key={type.type} className={styles.checkbox_container}>
-      <input
-        type="checkbox"
-        name={type.type}
-        id={type.type}
-        onChange={handleClick}
-        checked={pokemon.types.includes(type.type)}
-      />
-      <label htmlFor={type.type} className={styles.type_label}> 
-        <span className={styles.type_icon}>{typeIcons[type.type]}</span>
-        {type.type}
-      </label>
-    </div>
-  ))}
-</div>
+          <label>Select Types (Up to 2):</label>
+          {pokemonTypes.map((type) => (
+            <div key={type.type} className={styles.checkbox_container}>
+              <input
+                type="checkbox"
+                name={type.type}
+                id={type.type}
+                onChange={handleClick}
+                checked={pokemon.types.includes(type.type)}
+              />
+              <label htmlFor={type.type} className={styles.type_label}>
+                <span className={styles.type_icon}>{typeIcons[type.type]}</span>
+                {type.type}
+              </label>
+            </div>
+          ))}
+          {validationErrors.types && <p className={styles.error_message}>{validationErrors.types}</p>}
+        </div>
         <button className={styles.submit_button} type="submit">Create</button>
       </form>
     </div>
-    
   );
 };
 

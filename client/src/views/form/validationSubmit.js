@@ -7,8 +7,8 @@ const validationSubmit = (pokemon) => {
     } else {
         const regexName = /^[a-zA-Z]+$/;
 
-        if (pokemon.name.length < 3 || pokemon.name.length > 15) {
-            errors.name = "Rango de 3 a 15 caracteres";
+        if (pokemon.name.length < 3 || pokemon.name.length > 10) {
+            errors.name = "Rango de 3 a 10 caracteres";
         }
 
         if (!regexName.test(pokemon.name)) {
@@ -30,6 +30,7 @@ const validationSubmit = (pokemon) => {
     if (!pokemon.types || pokemon.types.length === 0) {
         errors.types = "Debe seleccionar al menos un tipo";
     }
+
 
     return errors;
 };
