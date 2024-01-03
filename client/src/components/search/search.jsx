@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import {clearData, cerrarNavbar} from "../../redux/action";
+import {clearData} from "../../redux/action";
 import styles from "./search.module.css";
 import Card from "../../components/card/card";
 
@@ -16,7 +16,7 @@ const Search = () => {
         };
     },[])
     return (
-        <div className={styles.Cards} onClick={() => dispatch(cerrarNavbar(false))}>
+        <div className={styles.Cards}>
             <div className={styles.container_cards}>
             {
                 searchPokemon.length >= 1?searchPokemon.map(pokemon => {

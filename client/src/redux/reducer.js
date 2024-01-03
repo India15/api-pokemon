@@ -35,7 +35,9 @@ const reducer = (state = initialState, action) => {
 
   switch (type) {
     case GET_POKEMONS:
-      return { ...state, allPokemons: [...payload] };
+      return { ...state, 
+        allPokemons: [...payload],
+        pokemonsCache: [...payload], };
 
     case GET_PAGE_POKEMONS:
       const pokemonPerPage = 12;
@@ -93,26 +95,41 @@ const reducer = (state = initialState, action) => {
         allPokemons: sortedStrength,
       };
 
-case FILTER_BY_ORIGIN:
-  const propertyName = 'created';
-  const isPropertyAvailable = state.allPokemons.length > 0 &&
-    propertyName in state.allPokemons[0];
-  
-  let filteredByOrigin;
-  
-  if (isPropertyAvailable) {
-    filteredByOrigin = action.payload === 'created by User' ?
-      state.allPokemons.filter((pokemon) => pokemon[propertyName]) :
-      state.allPokemons.filter((pokemon) => !pokemon[propertyName]);
-  } else {
-    console.error(`La propiedad ${propertyName} no está presente en los objetos Pokémon.`);
-    filteredByOrigin = state.allPokemons;
-  }
-  
-  return {
-    ...state,
-    allPokemons: action.payload === 'all' ? state.allPokemons : filteredByOrigin,
-  };
+      case FILTER_BY_ORIGIN:
+        const propertyName = 'created';
+        const isPropertyAvailable = state.allPokemons.length > 0 &&
+          propertyName in state.allPokemons[0];
+      
+        let filteredByOrigin;
+      
+        if (isPropertyAvailable) {
+          if (action.payload === 'created by User') {
+            filteredByOrigin = state.allPokemons.filter((pokemon) => pokemon[propertyName]);
+          } else if (action.payload === 'all') {
+            console.log('Show all selected, reverting to the original state.');
+            console.log('Pokemons in state:', state.allPokemons);
+            console.log('Pokemons in cache:', state.pokemonsCache);
+            return {
+              ...state,
+              allPokemons: state.pokemonsCache.filter((pokemon) => !pokemon[propertyName]), // Solo toma los de la API
+            };
+          } else {
+            filteredByOrigin = state.allPokemons.filter((pokemon) => !pokemon[propertyName]);
+          }
+        } else {
+          console.error(`La propiedad ${propertyName} no está presente en los objetos Pokémon.`);
+          filteredByOrigin = state.allPokemons;
+        }
+      
+        console.log('Filtered by Origin:', action.payload, 'Result:', filteredByOrigin);
+      
+        return {
+          ...state,
+          allPokemons: filteredByOrigin,
+        };
+      
+      
+      
 
     case FILTER_BY_TYPE:
       const filteredByType = action.payload === 'all' ?

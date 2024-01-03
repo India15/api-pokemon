@@ -133,8 +133,7 @@ const Home = () => {
             <option disabled value="">
               Filter-Origin
             </option>
-            <option value="all">Show all...</option>
-            <option value="originals">Originals...</option>
+            <option value="all">Api</option>
             <option value="created by User">Created By User...</option>
           </select>
 

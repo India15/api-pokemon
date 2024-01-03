@@ -14,7 +14,7 @@ const Cards = () => {
 
   useEffect(() => {
     dispatch(getPokemons());
-  }, [dispatch]);
+  }, []); //llamado de los pokemons
 
   const indexOfLastPokemon = currentPage * pokemonPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
