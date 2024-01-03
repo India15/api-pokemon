@@ -6,6 +6,36 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import validationSubmit from "./validationSubmit";
 
+
+const typeIcons = {
+  all: "🌐",
+  normal: "🤷‍♂️",
+  fighting: "🥊",
+  flying: "🦅",
+  poison: "☠️",
+  ground: "🏞️",
+  rock: "🗿",
+  bug: "🐞",
+  ghost: "👻",
+  steel: "🛡️",
+  fire: "🔥",
+  water: "💧",
+  grass: "🌿",
+  electric: "⚡",
+  psychic: "🔮",
+  ice: "❄️",
+  dragon: "🐉",
+  dark: "🌑",
+  fairy: "🧚",
+  unknown: "❓",
+  shadow: "👥",
+};
+
+
+
+
+
+
 const Form = () => {
   const dispatch = useDispatch();
   const pokemonTypes = useSelector((state) => state.pokemonTypes) || [];
@@ -17,8 +47,8 @@ const Form = () => {
     attack: 1,
     defense: 1,
     speed: 1,
-    height: null,
-    weight: null,
+    height: 1,
+    weight: 1,
     types: [],
   });
 
@@ -219,27 +249,24 @@ const handleSubmit = async (e) => {
             />
           </div>
         </div>
-         <div className={styles.types_container}>
-          <label>Select Types (Up to 2):</label>
-          {pokemonTypes.map((type) => (
-            <div key={type.type} className={styles.checkbox_container}>
-              <input
-                type="checkbox"
-                name={type.type}
-                id={type.type}
-                onChange={handleClick}
-                checked={pokemon.types.includes(type.type)}
-              />
-              <label htmlFor={type.type}>{type.type}</label>
-            </div>
-          ))}
-        </div>
-        <div className={styles.submit_container}>
-          {/* Muestra los tipos seleccionados */}
-          {pokemon.types.length > 0 ? (
-            <p>Selected Types: {pokemon.types.join(", ")}</p>
-          ) : null}
-        </div>
+        <div className={styles.types_container}>
+  <label>Select Types (Up to 2):</label>
+  {pokemonTypes.map((type) => (
+    <div key={type.type} className={styles.checkbox_container}>
+      <input
+        type="checkbox"
+        name={type.type}
+        id={type.type}
+        onChange={handleClick}
+        checked={pokemon.types.includes(type.type)}
+      />
+      <label htmlFor={type.type} className={styles.type_label}>
+        <span className={styles.type_icon}>{typeIcons[type.type]}</span>
+        {type.type}
+      </label>
+    </div>
+  ))}
+</div>
         <button className={styles.submit_button} type="submit">Create</button>
       </form>
     </div>

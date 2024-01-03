@@ -38,7 +38,8 @@
     font-weight: 600;
     display: flex;
     font-family: Arial, Helvetica, sans-serif;
-    color: rgb(255, 255, 255);
+    color: #FFCB05;
+    text-shadow: 1px 1px 2px rgb(255, 255, 255);
 }
 
 
@@ -119,6 +120,7 @@
     margin: 0.5rem 0;
     font-family: Arial, Helvetica, sans-serif;
     color: #ffffff;
+    font-size: 14px;
 }
 
 .types_container > div {
@@ -198,7 +200,7 @@
     height: 10px;
     -webkit-appearance: none;
     margin: 10px 0;
-    background: transparent; /* Fondo transparente */
+    background: transparent; 
   }
   
   input[type="range"]:focus {
@@ -221,7 +223,7 @@
     cursor: pointer;
     background-color: #FFCB05 ;
     border-radius: 50%;
-    border: 2px solid #ffffff; /* Borde blanco para destacar la perilla */
+    border: 2px solid #ffffff; 
   }
   
   /* Estilo para la etiqueta asociada al control deslizante (opcional) */
