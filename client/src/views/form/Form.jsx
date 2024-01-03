@@ -70,11 +70,11 @@ const submitImage = async () => {
       const responseData = await response.json();
       return responseData.data.url;
     } else {
-      console.error("Error uploading image to ImgBB:", response.statusText);
+      console.error("Error al subir imagen en ImgBB:", response.statusText);
       return false;
     }
   } catch (error) {
-    console.error("Error uploading image to ImgBB:", error);
+    console.error("Error al subir imagen en  ImgBB:", error);
     return false;
   }
 };
