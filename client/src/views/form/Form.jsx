@@ -47,7 +47,7 @@ const handleChange = (event) => {
     setImage(event.target.files[0]);
     return;
   }
-
+//parsea a número
   const numericProperties = ["health", "attack", "defense", "speed", "height", "weight"];
   if (numericProperties.includes(property)) {
     value = Number(value);

@@ -34,9 +34,10 @@
 }
 
 .name {
-  font-size: 18px;
+  font-size: 28px;
   font-weight: bold;
   margin: 8px 0;
+  color:#FFCB05 ;
 }
 
 .id {
@@ -74,6 +75,7 @@
   padding: 8px 15px;
   background-color: #3363AF;
   color: #fff;
+  font-weight: bold;
   border: none;
   border-radius: 5px;
   cursor: pointer;

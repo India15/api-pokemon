@@ -35,6 +35,12 @@
 
 .numberPage_container p {
     display: inline;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.637);
 }
 
 .button_page {
@@ -73,20 +79,23 @@
     background-color:  #3363AF; 
     color: #fff; 
     transition: background-color 0.3s ease; 
+    font-weight: bold;
 }
 
 .button_prevnext:hover {
-    background-color: #0056b3;
+    background-color: #155894;
+
 }
 
 .button_prevnext:disabled {
-    background-color: #155894; 
+    background-color: #005dae; 
     cursor: not-allowed;
 }
 
 .styles.numberPage{
-background-color: aqua;
-    color: #070000;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 .types_pokemon1 {
