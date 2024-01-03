@@ -7,7 +7,7 @@ const Landing = () => {
   return (
     <div className={styles.container}>
       <div className={styles.gif}>
-        <img src="./assets/animated.gif" alt='GIF animado' className={styles.gifImage} />
+        <img src="./assets/C.gif" alt='GIF animado' className={styles.gifImage} />
       </div>
 
       <div>

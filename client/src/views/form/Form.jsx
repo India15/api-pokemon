@@ -14,9 +14,9 @@ const Form = () => {
     name: "",
     image: "",
     health: 1,
-    attack: 5,
-    defense: 5,
-    speed: 5,
+    attack: 1,
+    defense: 1,
+    speed: 1,
     height: null,
     weight: null,
     types: [],
@@ -56,21 +56,30 @@ const handleChange = (event) => {
   setPokemon({ ...pokemon, [property]: value });
 };
 
-  const submitImage = async () => {
-    const formData = new FormData();
-    formData.append("file", image);
-    formData.append("upload_preset", "dynh9dt8");
+const submitImage = async () => {
+  const formData = new FormData();
+  formData.append("image", image);
 
-    try {
-      const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/duy9efu8j/image/upload",
-        formData
-      );
-      return response.data.url;
-    } catch (error) {
+  try {
+    const response = await fetch("https://api.imgbb.com/1/upload?key=9e430c5e95bf23e4e358a33120c0c77d", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      return responseData.data.url;
+    } else {
+      console.error("Error uploading image to ImgBB:", response.statusText);
       return false;
     }
-  };
+  } catch (error) {
+    console.error("Error uploading image to ImgBB:", error);
+    return false;
+  }
+};
+
+
 
   const handleClick = (event) => {
     const typeInput = event.target.name;
@@ -159,7 +168,7 @@ const handleSubmit = async (e) => {
             <label htmlFor="attack">Attack</label>
             <input
               type="range"
-              min="5"
+              min="1"
               max="200"
               name="attack"
               id="attack"
